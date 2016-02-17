@@ -25,17 +25,14 @@ export function getsUser (user) {
           key: 'user',
           value: response.data.user
         };
+        let signinParams = {
+          type: 'SIGNIN_USER'
+        };
 
         localStorage.setItem('Scrutinize.JWT.token', JSON.stringify(response.data));
         dispatch(params);
         dispatch(userParams);
-      })
-      .then(() => {
-        let params = {
-          type: 'SIGNIN_USER'
-        };
-
-        dispatch(params);
+        dispatch(signinparams);
       })
       .then(() => {
         return getProject()
