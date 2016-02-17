@@ -111,6 +111,8 @@ export function user (state = userInitialState, action) {
       return newState;
     case 'DELETE_USER':
       return newState;
+    case 'CLEAR':
+      return userInitialState;
   }
   return state;
 };
@@ -140,6 +142,8 @@ export function projects (state = projectsInitialState, action) {
       });
       newState.list = newList;
       return newState;
+    case 'CLEAR':
+      return projectsInitialState;
   }
   return state;
 };
@@ -169,6 +173,8 @@ export function tests (state = testsInitialState, action) {
       });
       newState.list = newList;
       return newState;
+    case 'CLEAR':
+      return testsInitialState;
   }
   return state;
 };
@@ -196,6 +202,8 @@ export function comments (state = commentsInitialState, action) {
       var newList = newState.list.filter(item => item.id !== data.id);
       newState.list = newList;
       return newState;
+    case 'CLEAR':
+      return commentsInitialState;
   }
   return state;
 };
@@ -220,6 +228,8 @@ export function images (state = imagesInitialState, action) {
       var newList = newState.list.filter(item => item.id !== data.id);
       newState.list = newList;
       return newState;
+    case 'CLEAR':
+      return imagesInitialState;
   }
   return state;
 };
@@ -244,6 +254,8 @@ export function mouseTrackings (state = mouseTrackingsInitialState, action) {
       var newList = newState.list.filter(item => item.id !== data.id);
       newState.list = newList;
       return newState;
+    case 'CLEAR':
+      return mouseTrackingsInitialState;
   }
   return state;
 };
@@ -286,6 +298,8 @@ export function currentFocus (state = currentFocusInitialState, action) {
     case 'SET_FOCUS':
       newState[action.key] = action.value;
       return newState
+    case 'CLEAR':
+      return currentFocusInitialState;
   }
   return state;
 };
@@ -300,12 +314,17 @@ export function stateRouter (state = stateRouterInitialState, action) {
     case 'CONTENT_STATE':
       newState.contentState = action.target;
       return newState;
-    case 'SIGNIN_USER':
+    case 'GET_USER':
+      newState.pageState = 'authenticated';
+      return newState;
+    case 'POST_USER':
       newState.pageState = 'authenticated';
       return newState;
     case 'SIGNOUT_USER':
       newState.pageState = 'not_authenticated';
       return newState;
+    case 'CLEAR':
+      return stateRouterInitialState;
   }
   return state;
 };
@@ -326,6 +345,8 @@ export function modalState (state = modalInitialState, action) {
       newState.login = false;
       newState.getStarted = false;
       return newState;
+    case 'CLEAR':
+      return modalInitialState;
   }
   return state;
 };

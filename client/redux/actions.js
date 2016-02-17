@@ -25,15 +25,10 @@ export function getsUser (user) {
           key: 'user',
           value: response.data.user
         };
-        let signinParams = {
-          type: 'PAGE_STATE',
-          target: 'authenticated'
-        };
 
         localStorage.setItem('Scrutinize.JWT.token', JSON.stringify(response.data));
         dispatch(params);
         dispatch(userParams);
-        dispatch(signinparams);
       })
       .then(() => {
         return getProject()
@@ -69,7 +64,6 @@ export function postsUser (user) {
 
         localStorage.setItem('Scrutinize.JWT.token', JSON.stringify(response.data));
         dispatch(response);
-        dispatch(params);
       })
       .catch((error) => {
         var params = {
@@ -692,5 +686,11 @@ export function addProject (project) {
 export function resetError () {
   return {
     type: 'RESET_ERROR'
+  };
+}
+
+export function clearState () {
+  return {
+    type: 'CLEAR'
   };
 }
