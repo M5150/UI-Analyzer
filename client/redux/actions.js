@@ -26,7 +26,8 @@ export function getsUser (user) {
           value: response.data.user
         };
         let signinParams = {
-          type: 'SIGNIN_USER'
+          type: 'PAGE_STATE',
+          target: 'authenticated'
         };
 
         localStorage.setItem('Scrutinize.JWT.token', JSON.stringify(response.data));
