@@ -42,9 +42,22 @@ export function getsUser (user) {
           });
       })
       .catch((error) => {
+        let data = 'user error';
+        switch (error.status){
+          case 401:
+            data = 'please re-enter password';
+            break;
+          case 500:
+            data = 'unauthorized request';
+            break;
+          case 409: 
+            data = 'username taken';
+            break;
+        }
+
         var params = {
           type: 'ERROR_USER',
-          data: error
+          data: data
         };
 
         dispatch(params);
@@ -685,7 +698,7 @@ export function addProject (project) {
 
 export function resetError () {
   return {
-    type: 'RESET_ERROR'
+    type: 'ERROR_RESET'
   };
 }
 
