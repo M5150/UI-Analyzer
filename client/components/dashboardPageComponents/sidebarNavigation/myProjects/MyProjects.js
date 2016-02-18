@@ -8,7 +8,7 @@ import SettingsButton from './subComponents/SettingsButton';
 import InviteTestersButton from './subComponents/InviteTestersButton';
 import { Accordion, AccordionItem } from 'react-sanfona';
 import { Button } from 'react-bootstrap';
-import CreateProjectContainer from '../../contentComponents/addProjectContainer/subComponents/CreateProjectContainer';
+import CreateProjectContainer from './subComponents/CreateProjectContainer.js';
 import InviteTestersModal from './subComponents/inviteTestersModal';
 
 class MyProjects extends Component {

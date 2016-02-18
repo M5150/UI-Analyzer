@@ -131,6 +131,7 @@ export function projects (state = projectsInitialState, action) {
       return newState;
     case 'UPDATE_PROJECT':
       var newList = newState.list.map(item => item.id === data.id ? item = data : item);
+      console.log(newList)
       newState.list = newList;
       return newState;
     case 'DELETE_PROJECT':

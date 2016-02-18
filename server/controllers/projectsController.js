@@ -74,7 +74,7 @@ var updateProject = function (project) {
   })
   .then(function (result) {
     if (result.users[0].projectUser.get('role') === 'owner') {
-      return model.Project.update(project, {
+      return model.Project.update(project.update, {
         where: params
       })
       .spread(function (updated) {
