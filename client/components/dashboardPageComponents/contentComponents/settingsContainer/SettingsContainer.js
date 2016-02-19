@@ -18,7 +18,7 @@ class SettingsContainer extends Component {
   componentDidMount () {
     this.setState({ newDescription: this.props.currentFocus.project.description });
     this.setState({ newName: this.props.currentFocus.project.name });
-  }
+  };
 
   render () {
     let editNameStyle = {
@@ -74,16 +74,16 @@ class SettingsContainer extends Component {
 
     return (
       <div className = 'Settings'>
-        <Col className = "projectEntryComponent" xs={12} md={9}>
+        <Col className = "projectEntryComponent" xs = { 12 } md = { 9 }>
           <div className = "well bs-component">
             <Row className = "testRow" >
-              <Col className = "testLeftSideLabel" xs={6} md={3} ><h5> name </h5></Col>
-              <Col xs={12} md={8} className = "projectContent" ><h5>{ this.props.currentFocus.project.name }</h5></Col>
+              <Col className = "testLeftSideLabel" xs = { 6 } md = { 3 } ><h5> name </h5></Col>
+              <Col xs = { 12 } md = { 8 } className = "projectContent" ><h5>{ this.props.currentFocus.project.name }</h5></Col>
             </Row>
             <hr />
             <Row className = "testRow">
-              <Col className = "testLeftSideLabel" xs={6} md={3}><h5> prompt </h5></Col>
-              <Col xs={12} md={8}className = "projectContent" ><h5>{ this.props.currentFocus.project.description }</h5></Col>
+              <Col className = "testLeftSideLabel" xs = { 6 } md = { 3 }><h5> description </h5></Col>
+              <Col xs = { 12 } md = { 8 }className = "projectContent" ><h5>{ this.props.currentFocus.project.description }</h5></Col>
             </Row>
             <hr />
             <Row className = "testRow">
@@ -95,22 +95,24 @@ class SettingsContainer extends Component {
           <Modal show = { this.state.modalVisibility }>
             <form className = "settingsForm" onSubmit = { updateProject.bind(this) } >
               <Row>
-                <Col xs={2} md={2}>name</Col>
-                <Col  xs={12} md={10}>
+                <Col xs = { 2 } md = { 2 }>name</Col>
+                <Col xs = { 12 } md = { 10 }>
                   <Input onChange = { handleNameInput.bind(this) } id = "editName" type = "text" value = { this.state.newName } />
                 </Col>
               </Row>
               <Row>
-                <Col xs={2} md={2}>description</Col>
-                <Col xs={12} md={10}>
+                <Col xs = { 2 } md = { 2 }>description</Col>
+                <Col xs = { 12 } md = { 10 }>
                   <Input onChange = { handleDescriptionInput.bind(this) } id = "editDescription" type = "textarea" value = { this.state.newDescription } />
                 </Col>
               </Row>
             </form>
-              <Col className = "projectButtons">
+            <Row>
+              <Col xs = { 12 } md = { 12 }>
                 <Button className = "btn-primary" onClick = { updateProject.bind(this) } type = "button">save changes</Button>
                 <Button onClick = { toggleModal.bind(this) } className = "btn-default" type = "button">cancel</Button>
               </Col>
+            </Row>
           </Modal>
         </Col>
 

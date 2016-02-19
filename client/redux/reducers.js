@@ -131,7 +131,6 @@ export function projects (state = projectsInitialState, action) {
       return newState;
     case 'UPDATE_PROJECT':
       var newList = newState.list.map(item => item.id === data.id ? item = data : item);
-      console.log(newList)
       newState.list = newList;
       return newState;
     case 'DELETE_PROJECT':
@@ -162,8 +161,9 @@ export function tests (state = testsInitialState, action) {
       newState.list = newList;
       return newState;
     case 'UPDATE_TEST':
-      var newList = newState.list.map(item => item.id === data.id ? item = data : item);
-      newState.list = newList;
+      newState.list[action.index]['name'] = action.data.update.name;
+      newState.list[action.index]['prompt'] = action.data.update.prompt;
+      newState.list[action.index]['url'] = action.data.update.url;
       return newState;
     case 'DELETE_TEST':
       var newList = [];

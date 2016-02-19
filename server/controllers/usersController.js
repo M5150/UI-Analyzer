@@ -30,10 +30,9 @@ var createUser = function (user) {
   .spread(function (newUser, created) {
     if (!created) {
       throw (new Error ('Error! User already exists!'));
-    } else {
-      var returnObject = newUser.set({ password: null });
-      return returnObject;
     }
+    var returnObject = newUser.set({ password: null });
+    return returnObject;
   });
 };
 
@@ -47,10 +46,11 @@ var retrieveUser = function (user) {
   })
   .then(function (result) {
     if (result === null) {
-      throw (new Error ('Error! User does not exist!'));
-    } else {
-      return result;
+      var error = new Error;
+      error.name = 'username';
+      throw (error);
     }
+    return result;
   });
 };
 
@@ -67,9 +67,8 @@ var updateUser = function (user) {
   .spread(function (updated) {
     if (updated === 0) {
       throw (new Error ('Error! User update failed!'));
-    } else {
-      return user;
     }
+    return user;
   });
 };
 
@@ -84,9 +83,8 @@ var deleteUser = function (user) {
   .then(function (deleted) {
     if (deleted === 0) {
       throw (new Error ('Error! User delete failed!'));
-    } else {
-      return deleted;
     }
+    return deleted;
   });
 };
 
@@ -96,17 +94,3 @@ module.exports = {
   updateUser: updateUser,
   deleteUser: deleteUser
 };
-
-// TEST AREA
-// model.init()
-// createUser({ email: 'max@max.com', password: 'abc123', salt: 'salty', firstname: null, surname: null, company: null })
-// // retrieveUser({ email: 'max@max.com' })
-//   .then(function(test) {
-//     console.log(test.get())
-//   })
-//   .then(function () {
-//     return deleteUser({email: 'max@max.com'})
-//       .then(function(deleted) {
-//         console.log(deleted)
-//       })
-//   })

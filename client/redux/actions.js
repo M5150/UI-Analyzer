@@ -45,13 +45,10 @@ export function getsUser (user) {
         let data = 'user error';
         switch (error.status){
           case 401:
-            data = 'please re-enter password';
+            data = 'Please re-enter your password.';
             break;
           case 500:
-            data = 'unauthorized request';
-            break;
-          case 409: 
-            data = 'username taken';
+            data = 'Please re-enter your username.';
             break;
         }
 
@@ -283,7 +280,8 @@ export function updatesTest (test) {
       .then((response) => {
         var params = {
           type: 'UPDATE_TEST',
-          data: response.data
+          data: response.data,
+          index: test.index
         };
 
         dispatch(params);
@@ -623,10 +621,11 @@ export function signsOut () {
       .then((response) => {
         var params = {
           type: 'SIGNOUT_USER'
-        }
+        };
 
-        window.localStorage.removeItem('Scrutinize.JWT.token');
         dispatch(params);
+        window.localStorage.removeItem('Scrutinize.JWT.token');
+        window.localStorage.removeItem('Scrutinize.saved.state');
       })
       .catch((error) => {
         var params = {

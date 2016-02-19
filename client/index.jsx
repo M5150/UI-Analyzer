@@ -25,13 +25,11 @@ const reducers = {
   form: formReducer
 };
 const combinedReducers = combineReducers(reducers);
-//combined reducer is wrapped for saving state
 const reducer = storage.reducer(combinedReducers);
 const engine = createEngine('Scrutinize.saved.state');
 const middleware = storage.createMiddleware(engine);
-
-let createStoreWithMiddleware = applyMiddleware(thunk, middleware)(createStore);
-let store = createStoreWithMiddleware(reducer);
+const createStoreWithMiddleware = applyMiddleware(thunk, middleware)(createStore);
+const store = createStoreWithMiddleware(reducer);
 const load = storage.createLoader(engine);
 
 const app = () => {
@@ -49,7 +47,8 @@ load(store)
     recallState();
     app();
   })
-  .catch(() => {
+  .catch((error) => {
+    console.log(error);
     console.log('failed to load previous state')
     app();
   })

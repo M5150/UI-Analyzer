@@ -11,9 +11,6 @@ import { showLoginModal, showSignupModal, getsUser, postsUser, pageState, resetE
 class LandingPage extends Component {
   onLogin (user) {
      this.props.dispatch(getsUser(user));
-     if (this.props.errorState.userError.headers.status === 401) {
-       this.props.dispatch(showLoginModal(false));
-     }
      this.props.dispatch(resetError());
    }
 

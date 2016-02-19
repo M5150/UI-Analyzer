@@ -210,12 +210,16 @@ input:-webkit-autofill {
   position: relative;
 }
 
+.testRow button {
+  margin-right: 5px;
+}
+
 .testLeftSideLabel {
   text-align: center;
 }
 
 .projectEntryButton, .testEntryButton {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .editSpan , .createTestSpan {
