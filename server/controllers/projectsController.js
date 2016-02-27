@@ -1,11 +1,5 @@
 var model = require('../db/model');
 
-// var Project = sequelize.define('project', {
-//   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-//   name: { type: Sequelize.STRING, unique: true, notNull: true, notEmpty: true },
-//   description: { type: Sequelize.STRING }
-// }, { timestamps: false });
-
 // input should be of the following format:
 // { userId: 123, name: 'abc', description: 'abc' }
 // output shall be of the following format:

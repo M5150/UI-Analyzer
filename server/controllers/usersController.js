@@ -1,15 +1,5 @@
 var model = require('../db/model');
 
-// var User = sequelize.define('user', {
-//   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-//   email: { type: Sequelize.STRING, unique: true, notNull: true, notEmpty: true },
-//   password: { type: Sequelize.STRING, notNull: true, notEmpty: true },
-//   salt: { type: Sequelize.STRING, notNull: true, notEmpty: true },
-//   firstname: { type: Sequelize.STRING },
-//   surname: { type: Sequelize.STRING },
-//   company: { type: Sequelize.STRING }
-// }, { timestamps: false });
-
 // input should be of the following format:
 // { email: 'abc@abc.com', password: '32kj3r2kjsdnkjsd', salt: '23423asfdsafsd', company: 'abc' || NULL, firstname: 'abc' || NULL, surname: 'abc' || NULL }
 // output shall be of the following format:
@@ -30,9 +20,10 @@ var createUser = function (user) {
   .spread(function (newUser, created) {
     if (!created) {
       throw (new Error ('Error! User already exists!'));
+    } else {
+      var returnObject = newUser.set({ password: null });
+      return returnObject;
     }
-    var returnObject = newUser.set({ password: null });
-    return returnObject;
   });
 };
 
@@ -46,11 +37,10 @@ var retrieveUser = function (user) {
   })
   .then(function (result) {
     if (result === null) {
-      var error = new Error;
-      error.name = 'username';
-      throw (error);
+      throw (new Error ('Error! User does not exist!'));
+    } else {
+      return result;
     }
-    return result;
   });
 };
 
@@ -67,8 +57,9 @@ var updateUser = function (user) {
   .spread(function (updated) {
     if (updated === 0) {
       throw (new Error ('Error! User update failed!'));
+    } else {
+      return user;
     }
-    return user;
   });
 };
 
@@ -83,8 +74,9 @@ var deleteUser = function (user) {
   .then(function (deleted) {
     if (deleted === 0) {
       throw (new Error ('Error! User delete failed!'));
+    } else {
+      return deleted;
     }
-    return deleted;
   });
 };
 

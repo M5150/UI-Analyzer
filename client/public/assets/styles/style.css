@@ -106,12 +106,6 @@ html, body {
   margin-bottom: 0;
 }
 
-/*.dashboardNav {
-  float:left;
-  height: 100%;
-  background-color: #2b3e50;;
-}*/
-
 .dashboardContent {
   height: 100%;
   width: 80%;
@@ -146,7 +140,7 @@ html, body {
   width: 100%;
 }
 
-.projectAccordionItems {
+.accordionItems {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -167,7 +161,7 @@ input:-webkit-autofill {
 
 /*styling the settings and test pages on the dashboard*/
 
-.Settings, .Tests {
+.Settings, .Tests, .Dashboard {
   display: flex;
   flex-direction: column;
   min-width: 70%;
@@ -232,18 +226,6 @@ input:-webkit-autofill {
   height: 31px;
 }
 
-.addTestInput[type="text"] {
-  -webkit-transition: all 0.7s ease 0s;
-  -moz-transition: all 0.7s ease 0s;
-  -o-transition: all 0.7s ease 0s;
-  transition: all 0.7s ease 0s;
-  width: 181px;
-}
-
-.addTestInput[type="text"]:focus {
-  width: 290px;
-}
-
 #editName {
   height: 25px;
 }
@@ -294,6 +276,7 @@ input:-webkit-autofill {
 
 .panel {
   margin-top: 20px;
+  margin-bottom: 21px;
   text-align: center;
 }
 

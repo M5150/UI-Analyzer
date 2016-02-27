@@ -25,17 +25,19 @@ passport.use(new LocalStrategy({ usernameField: 'email' },
             if (match) {
               // valid password
               return done(null, user, { id: user.id, email: user.email });
+            } else {
+              // invalid password
+              return done(null, false, { message: "Incorrect password." });
             }
-            // invalid password
-            return done(null, false, { message: "Incorrect password." });
           });
       })
       // something happened
-      .catch(function (error) {
-        if (error.name === 'username') {
+      .catch(function (err){
+        if (err.message == 'User does not exist!') {
           return(done(null, false, { message: "User not found." }));
+        } else {
+          return done(err);
         }
-        return done(error);
       });
   }
 ));
@@ -61,21 +63,21 @@ passport.deserializeUser(function (email, callback) {
       // data is set to request.user
       callback(null, data);
     })
-    .catch(function (error) {
+    .catch(function (error){
       return callback(error);
     });
 });
 
 // USER AUTHENTICATION JWT TOKENS
 
-var authenticate = function(req, res, next) {
+var authenticate = function (req, res, next) {
   //user has authenticated correctly thus we create a JWT token
-  passport.authenticate('local', function(error, user, info) {
-    if (error) {
-      return next(error);
+  passport.authenticate('local', function (err, user, info) {
+    if (err) {
+      return next(err);
     }
     if (!user) {
-      return res.json(401, { error: 'Unable to authenticated user.' });
+      return res.json(401, { error: 'message' });
     }
 
     user.password = null;
@@ -91,7 +93,6 @@ var authenticate = function(req, res, next) {
       expires: expires,
       user: user.toJSON()
     };
-
     next();
   })(req, res, next);
 };
@@ -125,6 +126,8 @@ var encodeInvitation = function (req, res, next) {
     email: req.body.email
   };
 
+  console.log('invitation params:', params)
+
   var expires = moment().add('days', 30).valueOf();
   var token = jwt.encode({
     iss: params,
@@ -133,7 +136,7 @@ var encodeInvitation = function (req, res, next) {
 
   req.invitationToken = token;
   next();
-};
+}
 
 var decodeInvitation = function (req, res, next) {
   var token = req.body.token;
@@ -155,7 +158,7 @@ var decodeInvitation = function (req, res, next) {
   req.invitationToken = decoded;
   req.body.email = decoded.iss.email;
   next();
-};
+}
 
 // inputs:
   // in data field:
